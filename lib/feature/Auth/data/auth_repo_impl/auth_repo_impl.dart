@@ -10,8 +10,8 @@ import '../model/user_model.dart';
 class AuthRepoImpl implements AuthRepo{
   final FireBaseService fireBaseService;
   AuthRepoImpl({required this.fireBaseService});
-  @override
 
+  @override
   Future<UserEntity> signInWithEmailAndPassword({required String email, required String password}) async{
    try{
      final data = await fireBaseService.signInWithEmailAndPassword(email: email, password: password);
@@ -24,5 +24,23 @@ class AuthRepoImpl implements AuthRepo{
      throw ApiException('حدث خطأ غير متوقع');
    }
   }
+
+  @override
+  Future<UserEntity> signUpWithEmailAndPassword({required String email, required String password ,required String name}) async{
+    try{
+      final data = await fireBaseService.signUpWithEmailAndPassword(
+          email: email,
+          password: password,
+      );
+      return UserModel.fromFirebase(data);
+    }on FirebaseAuthException catch (e){
+      throw FirebaseAuthErrorMapper.map(e);
+    } catch(e){
+      throw ApiException('حدث خطأ غير متوقع');
+    }
+  }
+
+
+
 
 }
