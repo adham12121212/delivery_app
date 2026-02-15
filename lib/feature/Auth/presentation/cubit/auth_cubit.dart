@@ -26,4 +26,20 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(message: 'حدث خطأ غير متوقع'));
     }
   }
+
+  Future<void> signUp(String email ,String password,String name)async{
+    emit(AuthLoading());
+    try{
+      final data = await authRepo.signUpWithEmailAndPassword(
+          email: email,
+          password: password,
+          name: name
+      );
+      emit(AuthSuccess(user: data));
+    }on ApiException catch(e){
+      emit(AuthError(message: e.message));
+    }catch(e){
+      emit(AuthError(message: 'حدث خطأ غير متوقع'));
+    }
+  }
 }
