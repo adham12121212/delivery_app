@@ -1,3 +1,4 @@
+import 'package:delivery_app/feature/Auth/presentation/views/rest_email_view.dart';
 import 'package:delivery_app/feature/Auth/presentation/views/signup_view.dart';
 import 'package:delivery_app/feature/Auth/presentation/widgets/social_button.dart';
 import 'package:flutter/material.dart';
@@ -109,6 +110,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         children: [
                           TextButton(
                               onPressed: (){
+                                Navigator.of(context).pushNamed(RestEmailView.routeName);
 
                               },
                               style: TextButton.styleFrom(
