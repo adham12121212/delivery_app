@@ -1,3 +1,4 @@
+import 'package:delivery_app/feature/Auth/presentation/views/signup_view.dart';
 import 'package:delivery_app/feature/Auth/presentation/widgets/social_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         children: [
           SizedBox(height: 50.h,),
           NavigateCreateLoginEmail(
-            onTap: (){},
+            onTap: (){
+              Navigator.of(context).pushReplacementNamed(SignupView.routeName);
+            },
             title1: 'ليس لديك حساب؟',
             title2: 'سجل الآن!',
           ),
@@ -105,20 +108,25 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
+                              onPressed: (){
+
+                              },
                               style: TextButton.styleFrom(
+                                elevation: 0,
+                                overlayColor: Colors.transparent,
                                 minimumSize: Size.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                tapTargetSize: MaterialTapTargetSize.padded,
                               ),
-                              onPressed: (){},
                               child: Text(
                                 'هل نسيت كلمة المرور؟',
                                 style: AppTextStyle.medium12.copyWith(
                                     color: AppColor.blackColor
-                                ),))
+                                ),)),
                         ],
                       ),
                       SizedBox(height: 24.h,),
-                      CustomButton(title: 'تسجيل الدخول!', onTap: (){
+                      CustomButton(title: 'تسجيل الدخول!',
+                        onTap: (){
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().
                           login(
