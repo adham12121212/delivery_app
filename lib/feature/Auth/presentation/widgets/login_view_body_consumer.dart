@@ -15,7 +15,6 @@ class LoginViewBodyConsumer extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if(state is AuthSuccess){
-
           print('success');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/get_it.dart';
+import 'core/route/routing.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'IBM Plex Sans Arabic',
         ),
-        home: const LoginView(),
+        onGenerateRoute: onGenerateRoute,
+        initialRoute: LoginView.routeName,
       ),
     );
   }
