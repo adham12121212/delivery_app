@@ -1,15 +1,8 @@
 # delivery_app
 
-A new Flutter project.
+-📱 Feature/ loginview
 
-## Getting Started
+<img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2026-02-12 at 00 57 51" src="https://github.com/user-attachments/assets/95c32b7c-961b-4b2f-995b-4d9dfa5f1494" />
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
