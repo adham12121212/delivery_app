@@ -42,4 +42,30 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(message: 'حدث خطأ غير متوقع'));
     }
   }
+
+  Future<void> google()async{
+    emit(AuthLoading());
+    try{
+      final data = await authRepo.signInWithGoogle();
+      emit(AuthSuccess(user: data));
+    }on ApiException catch(e){
+      print(e.message);
+      emit(AuthError(message: e.message));
+    }catch(e){
+      emit(AuthError(message: 'حدث خطأ غير متوقع'));
+    }
+  }
+
+  Future<void> facebook()async{
+    emit(AuthLoading());
+    try{
+      final data = await authRepo.signInWithFacebook();
+      emit(AuthSuccess(user: data));
+    }on ApiException catch(e){
+      emit(AuthError(message: e.message));
+    }catch(e){
+      emit(AuthError(message: 'حدث خطأ غير متوقع'));
+    }
+  }
+
 }

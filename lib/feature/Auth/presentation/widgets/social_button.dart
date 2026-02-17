@@ -8,34 +8,38 @@ import '../../../../core/constant/app_text_style.dart';
 
 class SocialButtons extends StatelessWidget {
   const SocialButtons({
-    super.key, required this.title, required this.image,
+    super.key, required this.title, required this.image, required this.onTap,
   });
 
   final String title;
   final String image;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        height: 52,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
-            border: Border.all(
-                color: AppColor.grey2Color,
-                width: 1
-            )
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(title,style: AppTextStyle.regular16.copyWith(
-                color: AppColor.blackColor
-            ),),
-            SizedBox(width: 8.w,),
-            SvgPicture.asset(image,width: 22.w,height: 22.h,),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 52,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(
+                  color: AppColor.grey2Color,
+                  width: 1
+              )
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(title,style: AppTextStyle.regular16.copyWith(
+                  color: AppColor.blackColor
+              ),),
+              SizedBox(width: 8.w,),
+              SvgPicture.asset(image,width: 22.w,height: 22.h,),
 
-          ],
+            ],
+          ),
         ),
       ),
     );
