@@ -40,6 +40,35 @@ class AuthRepoImpl implements AuthRepo{
     }
   }
 
+  @override
+  Future<UserEntity> signInWithGoogle() async{
+    try{
+      final data = await fireBaseService.signInWithGoogle();
+      return UserModel.fromFirebase(data);
+    }on FirebaseAuthException catch (e){
+      print('FirebaseAuthException${e}');
+      throw FirebaseAuthErrorMapper.map(e);
+    } catch(e){
+      print('catch${e}');
+      throw ApiException('حدث خطأ غير متوقع');
+    }
+  }
+
+  @override
+  Future<UserEntity> signInWithFacebook() async{
+    try{
+      final data = await fireBaseService.signInWithFacebook();
+      return UserModel.fromFirebase(data);
+    }on FirebaseAuthException catch (e){
+      print('FirebaseAuthException${e}');
+      throw FirebaseAuthErrorMapper.map(e);
+    } catch(e){
+      print('catch${e}');
+      throw ApiException('حدث خطأ غير متوقع');
+    }
+  }
+
+
 
 
 

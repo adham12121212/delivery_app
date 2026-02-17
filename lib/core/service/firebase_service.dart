@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FireBaseService {
 
@@ -28,6 +30,62 @@ class FireBaseService {
     );
     return credential.user!;
   }
+
+  Future<User> signInWithGoogle() async {
+
+      final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+      // Initialize (required in v7)
+      await googleSignIn.initialize();
+
+      // Start authentication
+      final GoogleSignInAccount googleUser =
+      await googleSignIn.authenticate();
+
+      final GoogleSignInAuthentication googleAuth =
+          googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+      return (await FirebaseAuth.instance
+          .signInWithCredential(credential)).user!;
+
+  }
+
+
+
+  Future<User> signInWithFacebook() async {
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    if (loginResult.status != LoginStatus.success ||
+        loginResult.accessToken == null) {
+      throw FirebaseAuthException(
+        code: 'facebook-login-failed',
+        message: loginResult.message ?? 'Facebook login failed',
+      );
+    }
+
+    final OAuthCredential credential =
+    FacebookAuthProvider.credential(
+      loginResult.accessToken!.tokenString,
+    );
+
+    final UserCredential userCredential =
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final user = userCredential.user;
+
+    if (user == null) {
+      throw FirebaseAuthException(
+        code: 'user-null',
+        message: 'User is null',
+      );
+    }
+
+    return user;
+  }
+
+
 
   String generateOTP() {
     final r = Random();

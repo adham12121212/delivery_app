@@ -144,11 +144,17 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                       Row(
                         children: [
                           SocialButtons(
+                            onTap: (){
+                              context.read<AuthCubit>().facebook();
+                            },
                             title: 'Facebook',
                             image: 'assets/logo/facebook.svg',
                           ),
                           SizedBox(width: 28.w,),
                           SocialButtons(
+                            onTap: (){
+                              context.read<AuthCubit>().google();
+                            },
                             title: 'Google',
                             image: 'assets/logo/google.svg',
                           ),

@@ -128,25 +128,33 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       ),
                       SizedBox(height: 24.h,),
                       CustomButton(title: 'تسجيل الدخول!',
-                        onTap: (){
+                        onTap:
+                            (){
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().
                           login(
                               emailController.text.trim(),
                               passwordController.text.trim());
                         }
-                      },),
+                      },
+                      ),
                       SizedBox(height: 125.h,),
                       CustomDivider(title: 'او تسجيل الدخول باستخدام',),
                       SizedBox(height: 16.h),
                       Row(
                         children: [
                           SocialButtons(
+                            onTap: (){
+                              context.read<AuthCubit>().facebook();
+                            },
                             title: 'Facebook',
                             image: 'assets/logo/facebook.svg',
                           ),
                           SizedBox(width: 28.w,),
                           SocialButtons(
+                            onTap: (){
+                              context.read<AuthCubit>().google();
+                            },
                             title: 'Google',
                             image: 'assets/logo/google.svg',
                           ),
