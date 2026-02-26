@@ -41,4 +41,9 @@ abstract class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeight.w300,
   );
+  static const TextStyle simeBold17 = TextStyle(
+    fontFamily: 'IBM Plex Sans Arabic',
+    fontSize: 17,
+    fontWeight: FontWeight.w600,
+  );
 }

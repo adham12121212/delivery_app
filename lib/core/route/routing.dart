@@ -1,15 +1,20 @@
 
 import 'package:delivery_app/feature/Auth/presentation/views/login_view.dart';
 import 'package:delivery_app/feature/Auth/presentation/views/signup_view.dart';
+import 'package:delivery_app/feature/home/presentation/widgets/nav_botton_bar.dart';
+import 'package:delivery_app/feature/restaurant/presentation/view/restaurant_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../feature/Auth/presentation/views/otp_view.dart';
 import '../../feature/Auth/presentation/views/rest_email_view.dart';
 import '../../feature/Auth/presentation/views/success_view.dart';
+import '../../feature/home/presentation/view/home_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings setting){
   switch(setting.name){
+    case MainNavView.routeName:
+       return MaterialPageRoute(builder: (context)=> const MainNavView());
     case LoginView.routeName:
       return MaterialPageRoute(builder: (context)=> const LoginView());
     case SignupView.routeName:
@@ -20,7 +25,15 @@ Route<dynamic> onGenerateRoute(RouteSettings setting){
       return MaterialPageRoute(builder: (context)=>  OTPView(''));
       case SuccessView.routeName:
       return MaterialPageRoute(builder: (context)=> const SuccessView());
-    default:
+      case HomeView.routeName:
+      return MaterialPageRoute(builder: (context)=> const HomeView());
+    case RestaurantView.routeName:
+      final category = setting.arguments as String?;
+      return MaterialPageRoute(
+        builder: (context) => RestaurantView(category: category),
+        settings: setting,
+      );
+      default:
       return MaterialPageRoute(builder: (context)=> const NoScreen());
   }
 }

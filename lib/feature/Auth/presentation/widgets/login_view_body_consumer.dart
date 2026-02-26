@@ -2,8 +2,10 @@ import 'package:delivery_app/feature/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:delivery_app/feature/Auth/presentation/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:retrofit/http.dart';
 import '../../../../core/widgets/awesome_snack_bar_content.dart';
+import '../rest_api_cubit/restapi_cubit.dart';
+import '../rest_api_cubit/restapi_state.dart';
 import 'login_view_body.dart';
 
 
@@ -15,7 +17,6 @@ class LoginViewBodyConsumer extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if(state is AuthSuccess){
-          print('success');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.transparent,
@@ -48,7 +49,6 @@ class LoginViewBodyConsumer extends StatelessWidget {
         return CustomLoadingOverlay(
             isLoading: state is AuthLoading ? true : false,
             loadingText: state is AuthLoading ? 'جاري تسجيل الدخول' : null,
-
             child: LoginViewBody());
       },
     );
