@@ -8,9 +8,15 @@ class AppColor {
   static const Color greyColor = Color(0xFF7A7A7A);
   static const Color grey2Color = Color(0xFFACACAC);
   static const Color purColor =    Color(0xFFD091F8);
+  static const Color purdarkColor =    Color(0xFF2D1B5A);
 
+
+  //     static const List<Color> primaryColors = [
+  //   Color(0xFF3546D7),
+  //   Color(0xFFD091F8),
+  // ];
       static const List<Color> primaryColors = [
-    Color(0xFF3546D7),
-    Color(0xFFD091F8),
+        Color(0xFF0D0D0D),
+        Color(0xFF2D1B5A),
   ];
 }

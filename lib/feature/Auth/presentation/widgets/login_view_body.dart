@@ -6,7 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/app_text_style.dart';
+import '../../data/model/login_request_body.dart';
 import '../cubit/auth_cubit.dart';
+import '../rest_api_cubit/restapi_cubit.dart';
 import 'custom_button.dart';
 import 'custom_divider.dart';
 import 'custom_text_form_field.dart';
@@ -131,8 +133,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         onTap:
                             (){
                         if (formKey.currentState!.validate()) {
-                          context.read<AuthCubit>().
-                          login(
+                          context.read<AuthCubit>().login(
                               emailController.text.trim(),
                               passwordController.text.trim());
                         }
