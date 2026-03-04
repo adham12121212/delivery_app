@@ -11,12 +11,18 @@ class AppColor {
   static const Color purdarkColor =    Color(0xFF2D1B5A);
 
 
-  //     static const List<Color> primaryColors = [
-  //   Color(0xFF3546D7),
-  //   Color(0xFFD091F8),
-  // ];
-      static const List<Color> primaryColors = [
+  static const List<Color> primaryColors = [
+    Color(0xFF3546D7),
+    Color(0xFFD091F8),
+  ];
+
+  static const List<Color> primary2Colors = [
         Color(0xFF0D0D0D),
         Color(0xFF2D1B5A),
+  ];
+
+  static const List<Color> primary3Colors = [
+    Color(0xFF),
+    Color(0xFFD091F8),
   ];
 }

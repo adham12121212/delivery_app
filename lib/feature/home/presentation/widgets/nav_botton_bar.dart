@@ -23,13 +23,11 @@ class _MainNavViewState extends State<MainNavView> {
     return Scaffold(
       body: Stack(
         children: [
-          /// Pages
           IndexedStack(
             index: _index,
             children: _pages,
           ),
 
-          /// Glass Bottom Nav
           Positioned(
             left: 16,
             right: 16,
@@ -146,7 +144,7 @@ class OrdersPage extends StatelessWidget {
     return _DemoPage(title: "Orders", icon: Icons.receipt_long_outlined);
   }
 }
-/// Simple demo UI background (replace with your real UI)
+
 class _DemoPage extends StatelessWidget {
   const _DemoPage({required this.title, required this.icon});
 

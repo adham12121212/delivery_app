@@ -26,9 +26,9 @@ class OfferCard extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18.r),
-        color: AppColor.whiteColor.withValues(alpha: .10),
+        color: AppColor.purdarkColor.withValues(alpha: .9),
         border: Border.all(
-          color: AppColor.whiteColor.withValues(alpha: .18),
+          color: AppColor.purdarkColor.withValues(alpha: .18),
           width: 1,
         ),
       ),

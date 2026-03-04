@@ -2,8 +2,12 @@
 
 import 'package:delivery_app/feature/home/data/home_repo_impl/home_repo_impl.dart';
 import 'package:delivery_app/feature/home/domain/home_repo/home_repo.dart';
+import 'package:delivery_app/feature/menu/data/menu_repo_iml/menu_repo_impl.dart';
+import 'package:delivery_app/feature/menu/domain/menu_repo/menu_repo.dart';
+import 'package:delivery_app/feature/menu/presentation/cubit/menu_cubit.dart';
 import 'package:delivery_app/feature/restaurant/data/restaurant_repo_impl/restaurant_repo_impl.dart';
 import 'package:delivery_app/feature/restaurant/domain/restaurant_repo/restaurant_reop.dart';
+import 'package:delivery_app/feature/restaurant/presentation/cubit/restaurant_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../feature/Auth/data/auth_repo_impl/auth_repo_impl.dart';
@@ -42,8 +46,15 @@ void setupLocator() {
   getIt.registerLazySingleton<RestaurantRepo>(() => RestaurantRepoImpl(
     getIt.get<FireStoreData>(),
   ));
+  getIt.registerLazySingleton<MenuRepo>(() => MenuRepoImpl(
+    getIt.get<FireStoreData>(),
+  ));
+  getIt.registerFactory<RestaurantCubit>(() => RestaurantCubit(getIt.get<RestaurantRepo>(),));
+  getIt.registerFactory<MenuCubit>(() => MenuCubit(getIt.get<MenuRepo>(),));
 
-  }
+
+
+}
 
 
 

@@ -13,7 +13,7 @@ class CurrentLocation extends StatelessWidget {
       children: [
         Icon(
             Icons.location_on,
-            color: AppColor.whiteColor,
+            color: AppColor.purdarkColor,
             size: 20.r
         ),
         SizedBox(
@@ -23,7 +23,7 @@ class CurrentLocation extends StatelessWidget {
           child: Text(
             'مدينة نصر',
             style: AppTextStyle.bold16
-                .copyWith(color: AppColor.whiteColor),
+                .copyWith(color: AppColor.purdarkColor),
             overflow: TextOverflow.ellipsis,
           ),
         ),

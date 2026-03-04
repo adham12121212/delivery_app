@@ -143,7 +143,6 @@ class _ArabicDiagonalFoodCardState extends State<ArabicDiagonalFoodCard>
                 ),
               ),
 
-              /// Badge السعر
               Positioned(
                 top: 0,
                 left: 0,

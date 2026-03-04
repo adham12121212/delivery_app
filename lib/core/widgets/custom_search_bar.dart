@@ -5,22 +5,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constant/app_color.dart';
 import '../constant/app_text_style.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class CustomSearchBar extends StatelessWidget {
+  const CustomSearchBar({super.key, this.color, this.onChanged});
+
+  final Color? color;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
+      height: 40.h,
       decoration: BoxDecoration(
-        color: AppColor.whiteColor.withValues(alpha: .15),
+        color: color ?? AppColor.whiteColor.withValues(alpha: .15),
         borderRadius: BorderRadius.circular(14.r),
         border: Border.all(
           color: AppColor.whiteColor.withValues(alpha: .3),
           width: 2,
         ),
       ),
-      child: TextFormField(
+      child: TextField(
+        onChanged: onChanged,
         textAlign: TextAlign.right,
         cursorColor: AppColor.whiteColor,
         style: AppTextStyle.regular16

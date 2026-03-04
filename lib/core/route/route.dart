@@ -1,7 +1,9 @@
 
 import 'package:delivery_app/feature/Auth/presentation/views/login_view.dart';
 import 'package:delivery_app/feature/Auth/presentation/views/signup_view.dart';
+import 'package:delivery_app/feature/details/presentation/view/details_view.dart';
 import 'package:delivery_app/feature/home/presentation/widgets/nav_botton_bar.dart';
+import 'package:delivery_app/feature/menu/presentation/view/menu_view.dart';
 import 'package:delivery_app/feature/restaurant/presentation/view/restaurant_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,18 +16,18 @@ import '../../feature/home/presentation/view/home_view.dart';
 Route<dynamic> onGenerateRoute(RouteSettings setting){
   switch(setting.name){
     case MainNavView.routeName:
-       return MaterialPageRoute(builder: (context)=> const MainNavView());
+      return MaterialPageRoute(builder: (context)=> const MainNavView());
     case LoginView.routeName:
       return MaterialPageRoute(builder: (context)=> const LoginView());
     case SignupView.routeName:
       return MaterialPageRoute(builder: (context)=> const SignupView());
-      case RestEmailView.routeName:
+    case RestEmailView.routeName:
       return MaterialPageRoute(builder: (context)=> const RestEmailView());
-      case OTPView.routeName:
+    case OTPView.routeName:
       return MaterialPageRoute(builder: (context)=>  OTPView(''));
-      case SuccessView.routeName:
+    case SuccessView.routeName:
       return MaterialPageRoute(builder: (context)=> const SuccessView());
-      case HomeView.routeName:
+    case HomeView.routeName:
       return MaterialPageRoute(builder: (context)=> const HomeView());
     case RestaurantView.routeName:
       final category = setting.arguments as String?;
@@ -33,7 +35,17 @@ Route<dynamic> onGenerateRoute(RouteSettings setting){
         builder: (context) => RestaurantView(category: category),
         settings: setting,
       );
-      default:
+    case MenuView.routeName:
+      final args = setting.arguments as Map<String, dynamic>;
+      return MaterialPageRoute(builder: (context)=> MenuView(
+          restaurantId: args['id'],
+          restaurantTitle: args['title'],
+          restaurantImage: args['image'],
+          restaurantRating: args['rating'],
+      ));
+    case DetailsView.routeName:
+      return MaterialPageRoute(builder: (context)=> DetailsView());
+    default:
       return MaterialPageRoute(builder: (context)=> const NoScreen());
   }
 }

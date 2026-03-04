@@ -4,6 +4,7 @@ class OfferModel {
   final String image;
   final String title;
 
+
   OfferModel({
     required this.id,
     required this.title,

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/feature/restaurant/data/model/resturant_model.dart';
 
 import '../../feature/home/data/model/offer_model.dart';
-import '../erorr/api_exception.dart';
+import '../../feature/menu/data/model/menu_model.dart';
 
 class FireStoreData{
 
@@ -17,19 +17,30 @@ class FireStoreData{
   }
 
   Future<List<ResturantModel>> getResturant({String? category}) async {
+    Query<Map<String, dynamic>> query =
+    FirebaseFirestore.instance.collection('restaurant');
 
-      final ref = FirebaseFirestore.instance.collection('restaurant');
+    if (category != null && category.trim().isNotEmpty) {
+      query = query.where('category', isEqualTo: category.trim());
+    }
 
-      final query = (category == null || category.isEmpty)
-          ? ref
-          : ref.where('category', isEqualTo: category);
+    final snap = await query.get();
 
-      final snap = await query.get();
+    return snap.docs
+        .map((doc) => ResturantModel.fromJson(doc.data(), doc.id))
+        .toList();
+  }
 
-      return snap.docs
-          .map((doc) => ResturantModel.fromJson(doc.data()))
-          .toList();
+  Future<List<MenuModel>> getMenu(String restaurantId) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('restaurant')
+        .doc(restaurantId)
+        .collection('menu')
+        .get();
 
+    return snapshot.docs
+        .map((doc) => MenuModel.fromJson(doc.data(), doc.id))
+        .toList();
   }
 
 }

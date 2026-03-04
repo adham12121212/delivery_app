@@ -1,14 +1,13 @@
-import 'package:delivery_app/feature/Auth/presentation/views/login_view.dart';
 import 'package:delivery_app/feature/home/presentation/widgets/nav_botton_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/get_it.dart';
-import 'core/route/routing.dart';
-import 'feature/home/presentation/view/home_view.dart';
+import 'core/route/route.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +21,6 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
