@@ -46,7 +46,7 @@ class RestaurantView extends StatelessWidget {
                       Text(
                         'أفضل المطاعم',
                         style: AppTextStyle.simeBold17.copyWith(
-                          color: AppColor.purdarkColor,
+                          color: AppColor.accent,
                         ),
                       ),
                       SizedBox(height: 16.h),
@@ -88,7 +88,7 @@ class RestaurantView extends StatelessWidget {
                               child: Text(
                                 'لا توجد مطاعم حالياً',
                                 style: AppTextStyle.medium14.copyWith(
-                                  color: AppColor.purdarkColor,
+                                  color: AppColor.accent,
                                 ),
                               ),
                             ),

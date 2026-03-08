@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retrofit/http.dart';
 import '../../../../core/widgets/awesome_snack_bar_content.dart';
+import '../../../home/presentation/view/home_view.dart';
 import '../rest_api_cubit/restapi_cubit.dart';
 import '../rest_api_cubit/restapi_state.dart';
 import 'login_view_body.dart';
@@ -29,7 +30,7 @@ class LoginViewBodyConsumer extends StatelessWidget {
               ),
             ),
           );
-
+          Navigator.pushReplacementNamed(context, HomeView.routeName);
         }
         if(state is AuthError){
          ScaffoldMessenger.of(context).showSnackBar(

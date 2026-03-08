@@ -2,7 +2,7 @@ class MenuModel {
   final String id;
   final String image;
   final String name;
-  final String price;
+  final double price;
   final String menuCategory;
   final bool isAvailable;
 
@@ -23,7 +23,7 @@ class MenuModel {
       id: id,
       image: json['image'] ?? '',
       name: json['name'] ?? '',
-      price: json['price']??'' ,
+      price: (json['price'] ?? 0).toDouble() ,
       menuCategory: json['menuCategory'] ?? '',
       isAvailable: json['isAvailable'] ?? true,
     );
@@ -33,7 +33,7 @@ class MenuModel {
     return MenuModel(
       id: '0',
       name: 'Loading Item',
-      price: 'Loading',
+      price: 0000,
       menuCategory: 'Loading',
       isAvailable: true,
       image: '',

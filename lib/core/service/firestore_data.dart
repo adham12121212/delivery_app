@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/feature/Auth/data/model/user_model.dart';
 import 'package:delivery_app/feature/restaurant/data/model/resturant_model.dart';
 
 import '../../feature/home/data/model/offer_model.dart';
@@ -43,4 +44,21 @@ class FireStoreData{
         .toList();
   }
 
+
+  Future<void> addData({
+    required String path,
+    required Map<String, dynamic> data,
+    String? documentId,
+  }) async {
+    if (documentId != null) {
+      await FirebaseFirestore.instance
+          .collection(path)
+          .doc(documentId)
+          .set(data);
+    } else {
+      await FirebaseFirestore.instance
+          .collection(path)
+          .add(data);
+    }
+  }
 }

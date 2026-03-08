@@ -47,7 +47,7 @@ class RestaurantCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18.r),
               color:
-              isLoading ? Colors.grey.shade50 : AppColor.purdarkColor.withValues(alpha: .9),
+              isLoading ? Colors.grey.shade50 : AppColor.accent.withValues(alpha: .9),
               border:
               Border.all(
                 color: isLoading ? Colors.grey.shade50 : AppColor.blackColor.withValues(alpha: .18),
@@ -127,9 +127,9 @@ class RestaurantCard extends StatelessWidget {
                                 color: AppColor.whiteColor,
                               ),
                             ),
-                            const Icon(
+                             Icon(
                               Icons.star_rounded,
-                              color: Colors.amberAccent,
+                              color: AppColor.surface,
                             ),
                           ],
                         ),

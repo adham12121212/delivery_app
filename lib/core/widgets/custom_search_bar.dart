@@ -32,11 +32,11 @@ class CustomSearchBar extends StatelessWidget {
         decoration: InputDecoration(
           hintText: "ابحث عن وجبة أو مطعم",
           hintStyle: AppTextStyle.regular14.copyWith(
-            color: AppColor.whiteColor.withValues(alpha: .6),
+            color: AppColor.whiteColor,
           ),
           prefixIcon: Icon(
             CupertinoIcons.search,
-            color: AppColor.whiteColor.withValues(alpha: .7),
+            color: AppColor.whiteColor,
           ),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(vertical: 14.h),

@@ -19,15 +19,16 @@ class BuildSection extends StatelessWidget {
   final List<MenuModel> items;
   final bool isLoading;
 
+
   @override
   Widget build(BuildContext context) {
-    /// 👇 لو loading بنعمل Fake Items عشان الـ Grid تبان مليانة
+
     final displayItems =
     isLoading ? List.generate(6, (index) => MenuModel(
       id: '',
       name: 'Loading',
       image: '',
-      price: '',
+      price: 0,
       menuCategory: '',
       isAvailable: true,
     )) : items;
@@ -49,7 +50,7 @@ class BuildSection extends StatelessWidget {
             Text(
               title,
               style: AppTextStyle.bold19.copyWith(
-                color: AppColor.purdarkColor,
+                color: AppColor.accent,
               ),
             ),
 
@@ -67,128 +68,136 @@ class BuildSection extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final item = displayItems[index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      DetailsView.routeName,
+                      arguments: item,
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: AppColor.accent.withValues(alpha: .9),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: AppColor.purdarkColor.withOpacity(0.08),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      ClipRRect(
-                        borderRadius:  BorderRadius.only(
-                          topLeft: Radius.circular(12.r),
-                          topRight: Radius.circular(12.r),
+                        ClipRRect(
+                          borderRadius:  BorderRadius.only(
+                            topLeft: Radius.circular(12.r),
+                            topRight: Radius.circular(12.r),
+                          ),
+                          child: isLoading
+                              ? Container(
+                            height: 90.h,
+                            width: double.infinity,
+                            color: Colors.grey.shade300,
+                          )
+                              : Image.network(
+                            item.image,
+                            height: 90.h,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (context, error, stackTrace) {
+                              return Container(
+                                height: 90.h,
+                                color: Colors.grey.shade300,
+                                child: const Icon(
+                                  Icons.broken_image,
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                        child: isLoading
-                            ? Container(
-                          height: 90.h,
-                          width: double.infinity,
-                          color: Colors.grey.shade300,
-                        )
-                            : Image.network(
-                          item.image,
-                          height: 90.h,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          errorBuilder:
-                              (context, error, stackTrace) {
-                            return Container(
-                              height: 90.h,
-                              color: Colors.grey.shade300,
-                              child: const Icon(
-                                Icons.broken_image,
-                              ),
-                            );
-                          },
-                        ),
-                      ),
 
-                       SizedBox(height: 8.h),
+                         SizedBox(height: 8.h),
 
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
 
-                            Expanded(
-                              child: Text(
-                                item.name,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTextStyle.bold16.copyWith(
-                                  color: AppColor.purdarkColor,
+                              Expanded(
+                                child: Text(
+                                  item.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.bold16.copyWith(
+                                    color: AppColor.surface,
+                                  ),
                                 ),
                               ),
-                            ),
 
 
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
 
-                      const Spacer(),
+                        const Spacer(),
 
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                           Container(
-                             padding: EdgeInsets.all(8.w),
-                             margin: EdgeInsets.symmetric(horizontal: 8.w),
-                             decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(12.r),
-                               color: AppColor.purdarkColor.withOpacity(0.08),
-                             ),
-                             child: Text(
-                               "${item.price} ",
-                               style: AppTextStyle.medium16.copyWith(
-                                 color: AppColor.purdarkColor,
+                         Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Container(
+                               padding: EdgeInsets.all(8.w),
+                               margin: EdgeInsets.symmetric(horizontal: 8.w),
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(12.r),
+                                 color: AppColor.surface,
+                               ),
+                               child: Text(
+                                 '${item.price.toStringAsFixed(0)} جنيه' ,
+                                 style: AppTextStyle.simeBold17.copyWith(
+                                   color: AppColor.accent,
+                                 ),
                                ),
                              ),
-                           ),
-                           Padding(
-                            padding:  EdgeInsets.all(8.w),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: GestureDetector(
-                                onTap: isLoading
-                                    ? null
-                                    : () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    DetailsView.routeName,
-                                  );
-                                },
-                                child:
-                                isLoading
-                                    ? Container(
-                                  height: 30.h,
-                                  width: 35.w,
-                                  color: Colors.grey.shade300,
-                                ):
-                                Container(
-                                  height: 30.h,
-                                  width: 35.w,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(10),
-                                    color: AppColor.purdarkColor,
-                                  ),
-                                  child: Icon(
-                                    Icons.open_in_full,
-                                    color: AppColor.whiteColor,
-                                    size: 20.h,
+                             Padding(
+                              padding:  EdgeInsets.all(8.w),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: GestureDetector(
+                                  onTap: isLoading
+                                      ? null
+                                      : () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      DetailsView.routeName,
+                                    );
+                                  },
+                                  child:
+                                  isLoading
+                                      ? Container(
+                                    height: 30.h,
+                                    width: 35.w,
+                                    color: Colors.grey.shade300,
+                                  ):
+                                  Container(
+                                    height: 30.h,
+                                    width: 35.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      color: AppColor.surface,
+                                    ),
+                                    child: Icon(
+                                      Icons.open_in_full,
+                                      color: AppColor.accent,
+                                      size: 20.h,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                                                 ),
-                         ],
-                       ),
-                    ],
+                                                   ),
+                           ],
+                         ),
+                      ],
+                    ),
                   ),
                 );
               },

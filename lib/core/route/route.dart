@@ -12,6 +12,7 @@ import '../../feature/Auth/presentation/views/otp_view.dart';
 import '../../feature/Auth/presentation/views/rest_email_view.dart';
 import '../../feature/Auth/presentation/views/success_view.dart';
 import '../../feature/home/presentation/view/home_view.dart';
+import '../../feature/menu/data/model/menu_model.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings setting){
   switch(setting.name){
@@ -44,7 +45,13 @@ Route<dynamic> onGenerateRoute(RouteSettings setting){
           restaurantRating: args['rating'],
       ));
     case DetailsView.routeName:
-      return MaterialPageRoute(builder: (context)=> DetailsView());
+      final menu = setting.arguments as MenuModel;
+
+      return MaterialPageRoute(
+        builder: (context) => DetailsView(
+          menu: menu,
+        ),
+      );
     default:
       return MaterialPageRoute(builder: (context)=> const NoScreen());
   }

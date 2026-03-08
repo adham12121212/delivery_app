@@ -56,7 +56,7 @@ class HomeAppBar extends StatelessWidget {
                         child: Builder(
                           builder: (context) {
                             return CustomSearchBar(
-                              color: AppColor.purdarkColor
+                              color: AppColor.accent
                                   .withOpacity(.9),
                               onChanged: (value) {
                                 context

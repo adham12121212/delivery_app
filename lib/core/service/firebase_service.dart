@@ -28,6 +28,7 @@ class FireBaseService {
         email: email,
         password: password
     );
+
     return credential.user!;
   }
 

@@ -46,11 +46,11 @@ class _CardItemMenuState extends State<CardItemMenu> {
                EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
               decoration: BoxDecoration(
                 color: isActive
-                    ? AppColor.purdarkColor
+                    ? AppColor.accent
                     : AppColor.whiteColor,
                 borderRadius: BorderRadius.circular(10.r),
                 border: Border.all(
-                  color: AppColor.purdarkColor,
+                  color: AppColor.accent,
                 ),
               ),
               child: Center(
@@ -59,7 +59,7 @@ class _CardItemMenuState extends State<CardItemMenu> {
                   style: AppTextStyle.medium16.copyWith(
                     color: isActive
                         ? AppColor.whiteColor
-                        : AppColor.purdarkColor,
+                        : AppColor.accent,
                   ),
                 ),
               ),

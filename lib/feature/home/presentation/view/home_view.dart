@@ -46,9 +46,6 @@ class HomeView extends StatelessWidget {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.purdarkColor.withValues(alpha: .0),
-                  ),
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: SafeArea(
                     bottom: false,
@@ -59,7 +56,7 @@ class HomeView extends StatelessWidget {
                         CurrentLocation(),
                         SizedBox(height: 20.h),
                         // ===== Search =====
-                        CustomSearchBar(color: AppColor.purdarkColor.withOpacity(.9)),
+                        CustomSearchBar(color: AppColor.accent.withOpacity(.7)),
                       ],
                     ),
                   ),
@@ -79,7 +76,7 @@ class HomeView extends StatelessWidget {
                            Text(
                              'الأصناف',
                              style: AppTextStyle.simeBold17.copyWith(
-                               color: AppColor.purdarkColor,
+                               color: AppColor.accent,
                              ),
                            ),
                            const Spacer(),
@@ -87,7 +84,7 @@ class HomeView extends StatelessWidget {
                              'عرض الكل',
                              style: AppTextStyle.regular14.copyWith(
                                color:
-                               AppColor.purdarkColor.withValues(alpha: .6),
+                               AppColor.accent.withValues(alpha: .5),
                              ),
                            ),
                          ],
@@ -111,7 +108,7 @@ class HomeView extends StatelessWidget {
                       OffersCarousel(),
                       SizedBox(height: 16.h),
                       Text('أفضل المطاعم',style: AppTextStyle.simeBold17.copyWith(
-                        color: AppColor.purdarkColor
+                        color: AppColor.accent
                       ),),
                       SizedBox(height:120,),
                     ],

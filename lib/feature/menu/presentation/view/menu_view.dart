@@ -8,6 +8,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/constant/app_color.dart';
 import '../../../../core/di/get_it.dart';
 import '../../../../core/widgets/custom_search_bar.dart';
+import '../../../details/presentation/view/details_view.dart';
 import '../../data/model/menu_model.dart';
 import '../widgets/build_section.dart';
 import '../widgets/card_item_menu.dart';
@@ -81,10 +82,14 @@ class _MenuViewState extends State<MenuView> {
         child: Scaffold(
           backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
-            backgroundColor: AppColor.whiteColor,
+            backgroundColor: AppColor.accent,
             toolbarHeight: 50.h,
+            automaticallyImplyLeading: false,
+
+            elevation: 0,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, size: 25),
+              icon:  Icon(Icons.arrow_back, size: 25,
+              color: AppColor.surface,),
               onPressed: () => Navigator.pop(context),
             ),
 
@@ -100,7 +105,7 @@ class _MenuViewState extends State<MenuView> {
                       title: 'Loading',
                       items: List.generate(
                         4,
-                            (index) => MenuModel.mock(), // أو dummy data
+                            (index) => MenuModel.mock(),
                       ),
                       isLoading: true,
                     ),

@@ -31,7 +31,7 @@ class CategoryCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18.r),
               color: isSelected
-                  ? AppColor.purdarkColor.withValues(alpha: .9)
+                  ? AppColor.accent.withValues(alpha: .7)
                   : AppColor.greyColor.withValues(alpha: .1),
               border: Border.all(
                 color: AppColor.whiteColor.withValues(alpha: .18),
@@ -50,7 +50,7 @@ class CategoryCard extends StatelessWidget {
         Text(
           title,
           style: AppTextStyle.regular14.copyWith(
-            color: AppColor.purdarkColor,
+            color: AppColor.accent,
           ),
         ),
       ],

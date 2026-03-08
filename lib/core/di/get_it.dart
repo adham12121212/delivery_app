@@ -30,8 +30,8 @@ void setupLocator() {
   getIt.registerLazySingleton<FireBaseService>(() => FireBaseService());
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(
     fireBaseService: getIt.get<FireBaseService>(),
+    fireStoreData: getIt.get<FireStoreData>(),
   ));
-
   getIt.registerLazySingleton<ResetRepo>(() => ResetRepoImpl(
     getIt.get<FireBaseService>(),
   ));

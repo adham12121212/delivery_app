@@ -130,11 +130,7 @@ class _OTPViewState extends State<OTPView> {
                   // Background gradient
                   Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: AppColor.primaryColors,
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+                     color: AppColor.accent
                     ),
                   ),
 
@@ -144,31 +140,9 @@ class _OTPViewState extends State<OTPView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "AZAIZA",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1,
-                                ),
-                              ),
-                              Text(
-                                "DESIGN STUDIO",
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
                           InkWell(
                             onTap: () => Navigator.pop(context),
-                            child: const Icon(Icons.arrow_forward_ios, color: Colors.white),
+                            child: const Icon(Icons.arrow_back_ios, color: Colors.white),
                           ),
                         ],
                       ),
@@ -203,7 +177,7 @@ class _OTPViewState extends State<OTPView> {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              "${otpCode.isEmpty ? "  " : otpCode.length}*",
+                              "${otpCode.isEmpty ? "" : otpCode.length}*",
                               style: TextStyle(
                                 color: AppColor.purColor,
                                 fontSize: 22,
@@ -275,7 +249,7 @@ class _OTPViewState extends State<OTPView> {
                                 child: Text(
                                   "طلب رمز جديد",
                                   style: TextStyle(
-                                    color: AppColor.purColor,
+                                    color: AppColor.accent,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
