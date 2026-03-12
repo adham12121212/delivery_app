@@ -4,25 +4,22 @@ import 'package:meta/meta.dart';
 part 'details_state.dart';
 
 class DetailsCubit extends Cubit<DetailsState> {
-  DetailsCubit(double price) : super(DetailsState(quantity: 1, totalPrice: price, unitPrice: price));
+  DetailsCubit(double price)
+      : super(DetailsState(quantity: 1, totalPrice: price, price: price));
 
-  /// زيادة الكمية
   void increment() {
-    emit(DetailsState(
-      quantity: state.quantity + 1,
-      unitPrice: state.unitPrice,
-      totalPrice: state.unitPrice * (state.quantity + 1),
-    ));
+    final current = state;
+    emit(current.copyWith(
+        quantity: current.quantity + 1,
+        totalPrice: (current.quantity + 1) * current.price));
   }
 
-  /// تقليل الكمية
   void decrement() {
-    if (state.quantity > 1) {
-      emit(DetailsState(
-        quantity: state.quantity - 1,
-        unitPrice: state.unitPrice,
-        totalPrice: state.unitPrice * (state.quantity - 1),
-      ));
+    final current = state;
+    if (current.quantity > 1) {
+      emit(current.copyWith(
+          quantity: current.quantity - 1,
+          totalPrice: (current.quantity - 1) * current.price));
     }
   }
 }

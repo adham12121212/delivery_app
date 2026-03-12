@@ -1,8 +1,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/feature/Auth/data/model/user_model.dart';
+import 'package:delivery_app/feature/cart/data/model/cart_item_model.dart';
 import 'package:delivery_app/feature/restaurant/data/model/resturant_model.dart';
-
 import '../../feature/home/data/model/offer_model.dart';
 import '../../feature/menu/data/model/menu_model.dart';
 
@@ -45,6 +45,8 @@ class FireStoreData{
   }
 
 
+
+
   Future<void> addData({
     required String path,
     required Map<String, dynamic> data,
@@ -61,4 +63,69 @@ class FireStoreData{
           .add(data);
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+
+  Future<void> setDocument({
+    required String collection,
+    required String docId,
+    required Map<String, dynamic> data,
+    String? subCollection,
+    String? subDocId,
+  }) async {
+    if (subCollection != null && subDocId != null) {
+      await _firestore
+          .collection(collection)
+          .doc(docId)
+          .collection(subCollection)
+          .doc(subDocId)
+          .set(data);
+    } else {
+      await _firestore
+          .collection(collection)
+          .doc(docId)
+          .set(data);
+    }
+  }
+
+  Future<Map<String, dynamic>?> getDocument({
+    required String collection,
+    required String docId,
+    String? subCollection,
+    String? subDocId,
+  }) async {
+    DocumentSnapshot doc;
+
+    if (subCollection != null && subDocId != null) {
+      doc = await _firestore
+          .collection(collection)
+          .doc(docId)
+          .collection(subCollection)
+          .doc(subDocId)
+          .get();
+    } else {
+      doc = await _firestore
+          .collection(collection)
+          .doc(docId)
+          .get();
+    }
+
+    return doc.exists ? doc.data() as Map<String, dynamic> : null;
+  }
+
+
+
+
 }

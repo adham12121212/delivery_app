@@ -16,6 +16,11 @@ import '../../feature/Auth/data/auth_repo_impl/reset_repo_impl.dart';
 import '../../feature/Auth/domain/auth_repo/auth_repo.dart';
 import '../../feature/Auth/domain/auth_repo/reset_repo.dart';
 import '../../feature/Auth/presentation/rest_api_cubit/restapi_cubit.dart';
+import '../../feature/details/data/details_repo_impl/datails_repo_impl.dart';
+import '../../feature/details/domain/details_repo/details_repo.dart';
+import '../../feature/location/data/location_repo_impl/location_repo_impl.dart';
+import '../../feature/location/domain/location_repo/location_repo.dart';
+import '../../feature/location/presentation/cubit/location_cubit.dart';
 import '../networking/api_service.dart';
 import '../networking/dio_factory.dart';
 import '../service/firebase_service.dart';
@@ -35,7 +40,11 @@ void setupLocator() {
   getIt.registerLazySingleton<ResetRepo>(() => ResetRepoImpl(
     getIt.get<FireBaseService>(),
   ));
-
+  getIt.registerLazySingleton<DetailsRepo>(
+        () => DetailsRepoImpl(
+      getIt.get<FireStoreData>(),
+    ),
+  );
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt.get<ApiService>(),));
   getIt.registerLazySingleton<RestapiCubit>(() => RestapiCubit(getIt.get<LoginRepo>(),));
@@ -49,8 +58,13 @@ void setupLocator() {
   getIt.registerLazySingleton<MenuRepo>(() => MenuRepoImpl(
     getIt.get<FireStoreData>(),
   ));
+  getIt.registerLazySingleton<LocationRepo>(() => LocationRepoImpl(
+    getIt.get<FireStoreData>(),
+  ));
   getIt.registerFactory<RestaurantCubit>(() => RestaurantCubit(getIt.get<RestaurantRepo>(),));
   getIt.registerFactory<MenuCubit>(() => MenuCubit(getIt.get<MenuRepo>(),));
+
+  getIt.registerFactory<LocationCubit>(() => LocationCubit(getIt.get<LocationRepo>(),));
 
 
 

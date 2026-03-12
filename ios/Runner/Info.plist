@@ -2,7 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>نحتاج إلى موقعك لتحديد منطقة التوصيل</string>
 
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>نحتاج إلى موقعك لتحديد منطقة التوصيل</string>
+
+        <key>NSLocationAlwaysUsageDescription</key>
+        <string>نحتاج إلى موقعك لتحديد منطقة التوصيل</string>
         <key>CADisableMinimumFrameDurationOnPhone</key>
         <true/>
 

@@ -44,9 +44,19 @@ class HomeAppBar extends StatelessWidget {
                       GestureDetector(
                         onTap: () =>
                             Navigator.pop(context),
-                        child:  Icon(
-                          Icons.arrow_back,
-                          size: 25,
+                        child:
+                        Container(
+                          height: 35.h,
+                          width: 35.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: AppColor.accent
+                          ),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 25,
+                            color: AppColor.whiteColor,
+                          ),
                         ),
                       ),
 

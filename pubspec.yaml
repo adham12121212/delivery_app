@@ -58,6 +58,11 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   carousel_slider:
   skeletonizer:
+  shared_preferences: ^2.5.4
+  google_maps_flutter: ^2.5.0
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
+  equatable: ^2.0.8
 
 flutter_intl:
   enabled: true
@@ -95,6 +100,7 @@ flutter:
   assets:
     - assets/logo/
     - assets/image/
+    - assets/mapStyle/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

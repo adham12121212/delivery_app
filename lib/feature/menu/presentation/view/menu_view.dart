@@ -82,15 +82,31 @@ class _MenuViewState extends State<MenuView> {
         child: Scaffold(
           backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
-            backgroundColor: AppColor.accent,
+            backgroundColor: AppColor.whiteColor,
             toolbarHeight: 50.h,
             automaticallyImplyLeading: false,
-
+            scrolledUnderElevation:0,
             elevation: 0,
-            leading: IconButton(
-              icon:  Icon(Icons.arrow_back, size: 25,
-              color: AppColor.surface,),
-              onPressed: () => Navigator.pop(context),
+            leadingWidth: 70.w,
+            leading:
+            GestureDetector(
+              onTap: () =>
+                  Navigator.pop(context),
+              child:
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16.w,vertical: 8.h),
+                height: 45,
+                width: 45,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: AppColor.accent
+                ),
+                child: Icon(
+                  Icons.arrow_back,
+                  size: 25,
+                  color: AppColor.whiteColor,
+                ),
+              ),
             ),
 
           ),

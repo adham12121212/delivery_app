@@ -1,6 +1,11 @@
 import 'dart:ui';
 import 'package:delivery_app/feature/home/presentation/view/home_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/constant/app_color.dart';
+import '../../../cart/presentation/view/cart_view.dart';
+import '../../../menu/data/model/menu_model.dart';
 
 class MainNavView extends StatefulWidget {
   const MainNavView({super.key});
@@ -13,8 +18,9 @@ class MainNavView extends StatefulWidget {
 class _MainNavViewState extends State<MainNavView> {
   int _index = 0;
 
-  final _pages = const [
+  final _pages =  [
     HomeView(),
+    CartView(),
     OrdersPage(),
   ];
 
@@ -29,14 +35,15 @@ class _MainNavViewState extends State<MainNavView> {
           ),
 
           Positioned(
-            left: 16,
-            right: 16,
-            bottom: 28,
+            left: 16.w,
+            right: 16.w,
+            bottom: 28.h,
             child: _GlassBottomNavBar(
               currentIndex: _index,
               onTap: (i) => setState(() => _index = i),
-              items: const [
-                _NavItem(icon: Icons.settings, label: 'الرائسيه'),
+              items: [
+                _NavItem(icon: CupertinoIcons.house_fill, label: 'الرائسيه'),
+                _NavItem(icon: Icons.add_shopping_cart, label: 'السلة'),
                 _NavItem(icon: Icons.receipt_long_outlined, label: 'الاوردر'),
               ],
             ),
@@ -61,19 +68,19 @@ class _GlassBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(8.r),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          padding:  EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(15.r),
             gradient: LinearGradient(
               begin: Alignment.bottomLeft,
               end: Alignment.topRight,
               colors: [
-                Colors.white.withOpacity(0.18),
-                Colors.white.withOpacity(0.06),
+                AppColor.accent.withOpacity(1),
+                AppColor.accent.withOpacity(0.9),
               ],
             ),
             border: Border.all(color: Colors.white.withOpacity(0.18)),
@@ -86,13 +93,13 @@ class _GlassBottomNavBar extends StatelessWidget {
 
               return InkWell(
                 onTap: () => onTap(i),
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(8.r),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? Colors.white.withOpacity(0.14)
+                        ? Colors.white.withOpacity(0.6)
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(18),
                   ),
@@ -101,14 +108,14 @@ class _GlassBottomNavBar extends StatelessWidget {
                     children: [
                       Icon(
                         item.icon,
-                        size: 22,
+                        size: 15.h,
                         color: isSelected ? Colors.white : Colors.white70,
                       ),
-                      const SizedBox(width: 8),
+                       SizedBox(width: 8.w),
                       Text(
                         item.label,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 12.w,
                           color: isSelected ? Colors.white : Colors.white70,
                           fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                         ),
@@ -154,25 +161,21 @@ class _DemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-          colors: [Color(0xFF0D0D0D), Color(0xFF2D1B5A)],
-        ),
+      decoration:  BoxDecoration(
+        color: AppColor.whiteColor
       ),
       child: SafeArea(
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 60, color: Colors.white),
-              const SizedBox(height: 12),
+              Icon(icon, size: 60.h, color: Colors.amberAccent),
+               SizedBox(height: 12.w),
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 28,
-                  color: Colors.white,
+                style:  TextStyle(
+                  fontSize: 28.sp,
+                  color: Colors.amberAccent,
                   fontWeight: FontWeight.bold,
                 ),
               ),

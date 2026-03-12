@@ -1,23 +1,29 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/app_text_style.dart';
+import '../../../../core/di/get_it.dart';
+import '../../../../core/widgets/awesome_snack_bar_content.dart';
+import '../../../cart/data/model/cart_item_model.dart';
+import '../../../cart/presentation/cubit/cart_cubit.dart';
 import '../../../menu/data/model/menu_model.dart';
+import '../../domain/details_repo/details_repo.dart';
 import '../cubit/details_cubit.dart';
 
 class DetailsView extends StatelessWidget {
   const DetailsView({super.key, required this.menu});
-
-  static const String routeName = 'details';
   final MenuModel menu;
+  static const String routeName = 'details';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DetailsCubit(menu.price),
+      create: (_) => DetailsCubit(
+        menu.price,
+      ),
       child: Scaffold(
         backgroundColor: AppColor.whiteColor,
         body: CustomScrollView(
@@ -26,6 +32,21 @@ class DetailsView extends StatelessWidget {
               expandedHeight: 260.h,
               pinned: true,
               backgroundColor: AppColor.whiteColor,
+              leadingWidth: 70.w,
+              scrolledUnderElevation: 0,
+              leading: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
+                  height: 45.h,
+                  width: 45.h,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    color: AppColor.accent,
+                  ),
+                  child: Icon(Icons.arrow_back, size: 25, color: AppColor.whiteColor),
+                ),
+              ),
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.network(menu.image, fit: BoxFit.cover),
               ),
@@ -41,9 +62,7 @@ class DetailsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(menu.name, style: AppTextStyle.bold19),
-                        Text(
-                            '${menu.price.toStringAsFixed(0)}  جنيه' ,
-                            style: AppTextStyle.bold16),
+                        Text('${menu.price.toStringAsFixed(0)}  جنيه', style: AppTextStyle.bold16),
                       ],
                     ),
                     SizedBox(height: 20.h),
@@ -61,8 +80,7 @@ class DetailsView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar:
-        BlocBuilder<DetailsCubit, DetailsState>(
+        bottomNavigationBar: BlocBuilder<DetailsCubit, DetailsState>(
           builder: (context, state) {
             return Container(
               padding: EdgeInsets.all(20.r),
@@ -72,6 +90,7 @@ class DetailsView extends StatelessWidget {
               ),
               child: Row(
                 children: [
+                  // Quantity selector
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColor.greyColor),
@@ -80,36 +99,69 @@ class DetailsView extends StatelessWidget {
                     child: Row(
                       children: [
                         IconButton(
-                          onPressed: () => context.read<DetailsCubit>().decrement(),
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            context.read<DetailsCubit>().decrement();
+                          },
                           icon: const Icon(Icons.remove),
                         ),
-                        Text(state.quantity.toString(), style: AppTextStyle.bold16),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: Text(
+                            state.quantity.toString(),
+                            key: ValueKey(state.quantity),
+                            style: AppTextStyle.bold16,
+                          ),
+                        ),
                         IconButton(
-                          onPressed: () => context.read<DetailsCubit>().increment(),
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            context.read<DetailsCubit>().increment();
+                          },
                           icon: const Icon(Icons.add),
                         ),
                       ],
                     ),
                   ),
-
                   SizedBox(width: 16.w),
 
+                  // Add to cart button
                   Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.accent,
-                        padding: EdgeInsets.symmetric(vertical: 14.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                      ),
-                      onPressed: () {
+                    child:
+                    ElevatedButton(
+                      onPressed: () async {
+                        final detailsState = context.read<DetailsCubit>().state;
+                        final cartCubit = context.read<CartCubit>();
+                        final cartItem = CartItemModel(
+                          id: menu.id,
+                          name: menu.name,
+                          image: menu.image,
+                          price: menu.price,
+                          quantity: detailsState.quantity,
+                          totalPrice: detailsState.totalPrice,
+                        );
+                        await cartCubit.addItem(cartItem);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            behavior: SnackBarBehavior.floating,
+                            content: AwesomeSnackBarContent(
+                              title: 'تهانينا',
+                              message: 'تمت الإضافة للسلة',
+                              type: SnackType.success,
+                            ),
+                          ),
+                        );
                       },
-                      child: Text(
-                        "أضف إلى السلة - ${state.totalPrice.toStringAsFixed(0)} جنيه",
-                        style: AppTextStyle.bold16.copyWith(color: Colors.white),
-                      ),
-                    ),
+                    style: ElevatedButton.styleFrom(
+                       backgroundColor: AppColor.accent,
+                        foregroundColor: AppColor.whiteColor,
+                        elevation: 0,
+                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+                ),
+                      child: Text('أضف إلى السلة - ${state.totalPrice.toStringAsFixed(0)} جنيه'),
+                    )
                   ),
                 ],
               ),
