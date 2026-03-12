@@ -57,6 +57,12 @@ dependencies:
   json_annotation: ^4.10.0
   pretty_dio_logger: ^1.4.0
   carousel_slider:
+  skeletonizer:
+  shared_preferences: ^2.5.4
+  google_maps_flutter: ^2.5.0
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
+  equatable: ^2.0.8
 
 flutter_intl:
   enabled: true
@@ -94,12 +100,13 @@ flutter:
   assets:
     - assets/logo/
     - assets/image/
+    - assets/mapStyle/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
-  # For details regarding adding assets from package dependencies, see
+  # For menu regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
 
   # To add custom fonts to your application, add a fonts section here,
@@ -119,6 +126,6 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
+  # For menu regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 

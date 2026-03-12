@@ -28,13 +28,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   Widget build(BuildContext context) {
     return  Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors:AppColor.primaryColors,
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            stops: [0,100]
-
-        ),
+        color: AppColor.accent
       ),
       child: Column(
         children: [

@@ -8,6 +8,7 @@ import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/app_text_style.dart';
 import '../../../../core/di/get_it.dart';
 import '../../../../core/widgets/current_location.dart';
+import '../../../../core/widgets/custom_search_bar.dart';
 import '../../domain/home_repo/home_repo.dart';
 import '../widgets/category_list.dart';
 import '../widgets/offers_carousel.dart';
@@ -28,12 +29,7 @@ class HomeView extends StatelessWidget {
   child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.primaryColors,
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-              stops: const [0, 1],
-            ),
+            color: Colors.white
           ),
           child: CustomScrollView(
             slivers: [
@@ -50,9 +46,6 @@ class HomeView extends StatelessWidget {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.purdarkColor.withValues(alpha: 0.10),
-                  ),
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: SafeArea(
                     bottom: false,
@@ -63,7 +56,7 @@ class HomeView extends StatelessWidget {
                         CurrentLocation(),
                         SizedBox(height: 20.h),
                         // ===== Search =====
-                        SearchBar()
+                        CustomSearchBar(color: AppColor.accent.withOpacity(.7)),
                       ],
                     ),
                   ),
@@ -83,7 +76,7 @@ class HomeView extends StatelessWidget {
                            Text(
                              'الأصناف',
                              style: AppTextStyle.simeBold17.copyWith(
-                               color: AppColor.whiteColor,
+                               color: AppColor.accent,
                              ),
                            ),
                            const Spacer(),
@@ -91,7 +84,7 @@ class HomeView extends StatelessWidget {
                              'عرض الكل',
                              style: AppTextStyle.regular14.copyWith(
                                color:
-                               AppColor.whiteColor.withValues(alpha: .6),
+                               AppColor.accent.withValues(alpha: .5),
                              ),
                            ),
                          ],
@@ -115,7 +108,7 @@ class HomeView extends StatelessWidget {
                       OffersCarousel(),
                       SizedBox(height: 16.h),
                       Text('أفضل المطاعم',style: AppTextStyle.simeBold17.copyWith(
-                        color: AppColor.whiteColor
+                        color: AppColor.accent
                       ),),
                       SizedBox(height:120,),
                     ],

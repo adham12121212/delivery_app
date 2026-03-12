@@ -1,3 +1,4 @@
+import 'package:delivery_app/core/constant/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/get_it.dart';
@@ -21,6 +22,7 @@ class LoginView extends StatelessWidget {
           getIt.get<AuthRepo>(),
         ),
         child: Scaffold(
+          backgroundColor: AppColor.accent,
           body: LoginViewBodyConsumer(),
         ),
       ),

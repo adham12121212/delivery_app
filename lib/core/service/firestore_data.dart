@@ -1,9 +1,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/feature/Auth/data/model/user_model.dart';
+import 'package:delivery_app/feature/cart/data/model/cart_item_model.dart';
 import 'package:delivery_app/feature/restaurant/data/model/resturant_model.dart';
-
 import '../../feature/home/data/model/offer_model.dart';
-import '../erorr/api_exception.dart';
+import '../../feature/menu/data/model/menu_model.dart';
 
 class FireStoreData{
 
@@ -17,19 +18,114 @@ class FireStoreData{
   }
 
   Future<List<ResturantModel>> getResturant({String? category}) async {
+    Query<Map<String, dynamic>> query =
+    FirebaseFirestore.instance.collection('restaurant');
 
-      final ref = FirebaseFirestore.instance.collection('restaurant');
+    if (category != null && category.trim().isNotEmpty) {
+      query = query.where('category', isEqualTo: category.trim());
+    }
 
-      final query = (category == null || category.isEmpty)
-          ? ref
-          : ref.where('category', isEqualTo: category);
+    final snap = await query.get();
 
-      final snap = await query.get();
-
-      return snap.docs
-          .map((doc) => ResturantModel.fromJson(doc.data()))
-          .toList();
-
+    return snap.docs
+        .map((doc) => ResturantModel.fromJson(doc.data(), doc.id))
+        .toList();
   }
+
+  Future<List<MenuModel>> getMenu(String restaurantId) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('restaurant')
+        .doc(restaurantId)
+        .collection('menu')
+        .get();
+
+    return snapshot.docs
+        .map((doc) => MenuModel.fromJson(doc.data(), doc.id))
+        .toList();
+  }
+
+
+
+
+  Future<void> addData({
+    required String path,
+    required Map<String, dynamic> data,
+    String? documentId,
+  }) async {
+    if (documentId != null) {
+      await FirebaseFirestore.instance
+          .collection(path)
+          .doc(documentId)
+          .set(data);
+    } else {
+      await FirebaseFirestore.instance
+          .collection(path)
+          .add(data);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+
+  Future<void> setDocument({
+    required String collection,
+    required String docId,
+    required Map<String, dynamic> data,
+    String? subCollection,
+    String? subDocId,
+  }) async {
+    if (subCollection != null && subDocId != null) {
+      await _firestore
+          .collection(collection)
+          .doc(docId)
+          .collection(subCollection)
+          .doc(subDocId)
+          .set(data);
+    } else {
+      await _firestore
+          .collection(collection)
+          .doc(docId)
+          .set(data);
+    }
+  }
+
+  Future<Map<String, dynamic>?> getDocument({
+    required String collection,
+    required String docId,
+    String? subCollection,
+    String? subDocId,
+  }) async {
+    DocumentSnapshot doc;
+
+    if (subCollection != null && subDocId != null) {
+      doc = await _firestore
+          .collection(collection)
+          .doc(docId)
+          .collection(subCollection)
+          .doc(subDocId)
+          .get();
+    } else {
+      doc = await _firestore
+          .collection(collection)
+          .doc(docId)
+          .get();
+    }
+
+    return doc.exists ? doc.data() as Map<String, dynamic> : null;
+  }
+
+
+
 
 }
