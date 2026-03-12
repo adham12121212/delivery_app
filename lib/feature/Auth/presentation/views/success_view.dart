@@ -38,13 +38,7 @@ class SuccessView extends StatelessWidget {
             builder: (context, state) {
               return Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: AppColor.primaryColors,
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                      stops: [0, 1.0]
-
-                  ),
+                  color: AppColor.accent
                 ),
                 child: Column(
                   children: [
@@ -66,7 +60,12 @@ class SuccessView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SvgPicture.asset('assets/logo/Vector.svg'),
+                              SvgPicture.asset('assets/logo/Vector.svg',
+                              colorFilter:const ColorFilter.mode(
+                                AppColor.accent,
+                                BlendMode.srcIn,
+                              ) ,
+                              ),
                               SizedBox(height: 24.h,),
                               Text('تهانينا!', style: AppTextStyle.bold24,),
                               SizedBox(height: 8.h,),
