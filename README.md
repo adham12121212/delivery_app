@@ -36,8 +36,3 @@
 <img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2026-03-16 at 14 59 30" src="https://github.com/user-attachments/assets/7a19d907-85fb-49ab-9e2d-9a64a1137361" />
 
 
-
-
-
-<img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2026-03-16 at 15 02 14" src="https://github.com/user-attachments/assets/918ef2a1-219e-4176-8220-efeab3076e5a" />
-
