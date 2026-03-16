@@ -53,8 +53,6 @@ class FireBaseService {
 
   }
 
-
-
   Future<User> signInWithFacebook() async {
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
@@ -85,7 +83,6 @@ class FireBaseService {
 
     return user;
   }
-
 
 
   String generateOTP() {
@@ -129,6 +126,10 @@ class FireBaseService {
       throw Exception('User not logged in');
     }
     await user.updatePassword(newPassword);
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
 

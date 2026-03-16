@@ -13,6 +13,7 @@ import 'package:get_it/get_it.dart';
 import '../../feature/Auth/data/auth_repo_impl/auth_repo_impl.dart';
 import '../../feature/Auth/data/auth_repo_impl/login_repo.dart';
 import '../../feature/Auth/data/auth_repo_impl/reset_repo_impl.dart';
+import '../../feature/Auth/data/model/user_model.dart';
 import '../../feature/Auth/domain/auth_repo/auth_repo.dart';
 import '../../feature/Auth/domain/auth_repo/reset_repo.dart';
 import '../../feature/Auth/presentation/rest_api_cubit/restapi_cubit.dart';
@@ -65,7 +66,6 @@ void setupLocator() {
   getIt.registerFactory<MenuCubit>(() => MenuCubit(getIt.get<MenuRepo>(),));
 
   getIt.registerFactory<LocationCubit>(() => LocationCubit(getIt.get<LocationRepo>(),));
-
 
 
 }

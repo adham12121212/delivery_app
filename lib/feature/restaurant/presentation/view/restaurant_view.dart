@@ -14,6 +14,7 @@ import '../../../../core/constant/app_text_style.dart';
 import '../../../../core/di/get_it.dart';
 import '../../../../core/widgets/current_location.dart';
 import '../../../../core/widgets/custom_search_bar.dart';
+import '../../../location/presentation/cubit/location_cubit.dart';
 import '../widgets/home_app_bar.dart';
 
 class RestaurantView extends StatelessWidget {
@@ -24,12 +25,19 @@ class RestaurantView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        final cubit = getIt<RestaurantCubit>();
-        cubit.getResturant(category: category);
-        return cubit;
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RestaurantCubit>(
+          create: (_) {
+            final cubit = getIt<RestaurantCubit>();
+            cubit.getResturant(category: category);
+            return cubit;
+          },
+        ),
+        BlocProvider<LocationCubit>(
+          create: (_) => getIt<LocationCubit>()..getLocation(),
+        ),
+      ],
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(

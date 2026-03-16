@@ -8,4 +8,9 @@ abstract class AuthRepo {
   Future<UserEntity> signUpWithEmailAndPassword({required String email, required String password,required String name});
   Future<UserEntity> signInWithGoogle();
   Future<UserEntity> signInWithFacebook();
-  Future<UserEntity> addUserData(UserModel userModel);}
+  Future<UserEntity> addUserData(UserModel userModel);
+  Future<UserEntity> getCurrentUser();
+  Future<void> signOut();
+
+
+}

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_color.dart';
+import '../../../Auth/presentation/views/profile_view.dart';
 import '../../../cart/presentation/view/cart_view.dart';
 import '../../../menu/data/model/menu_model.dart';
 
@@ -21,7 +22,7 @@ class _MainNavViewState extends State<MainNavView> {
   final _pages =  [
     HomeView(),
     CartView(),
-    OrdersPage(),
+    ProfileView(),
   ];
 
   @override
@@ -44,7 +45,7 @@ class _MainNavViewState extends State<MainNavView> {
               items: [
                 _NavItem(icon: CupertinoIcons.house_fill, label: 'الرائسيه'),
                 _NavItem(icon: Icons.add_shopping_cart, label: 'السلة'),
-                _NavItem(icon: Icons.receipt_long_outlined, label: 'الاوردر'),
+                _NavItem(icon: Icons.person, label: 'الحساب'),
               ],
             ),
           ),
@@ -141,48 +142,3 @@ class _NavItem {
 
 
 
-
-
-class OrdersPage extends StatelessWidget {
-  const OrdersPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return _DemoPage(title: "Orders", icon: Icons.receipt_long_outlined);
-  }
-}
-
-class _DemoPage extends StatelessWidget {
-  const _DemoPage({required this.title, required this.icon});
-
-  final String title;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration:  BoxDecoration(
-        color: AppColor.whiteColor
-      ),
-      child: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, size: 60.h, color: Colors.amberAccent),
-               SizedBox(height: 12.w),
-              Text(
-                title,
-                style:  TextStyle(
-                  fontSize: 28.sp,
-                  color: Colors.amberAccent,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
