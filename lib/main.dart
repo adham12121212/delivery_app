@@ -1,12 +1,3 @@
-import 'package:delivery_app/feature/Auth/presentation/views/login_view.dart';
-import 'package:delivery_app/feature/Auth/presentation/views/otp_view.dart';
-import 'package:delivery_app/feature/Auth/presentation/views/signup_view.dart';
-import 'package:delivery_app/feature/Auth/presentation/views/success_view.dart';
-import 'package:delivery_app/feature/home/presentation/view/home_view.dart';
-import 'package:delivery_app/feature/home/presentation/widgets/nav_botton_bar.dart';
-import 'package:delivery_app/feature/location/presentation/view/location_view.dart';
-import 'package:delivery_app/feature/menu/presentation/view/menu_view.dart';
-import 'package:delivery_app/feature/restaurant/presentation/view/restaurant_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

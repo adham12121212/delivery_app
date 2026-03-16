@@ -119,6 +119,43 @@ class AuthRepoImpl implements AuthRepo{
     }
   }
 
+  @override
+  Future<UserEntity> getCurrentUser() async {
+    try {
+
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+
+      if(uid == null){
+        throw ApiException('No logged user');
+      }
+
+      final data = await fireStoreData.getDocument(
+        collection: 'user',
+        docId: uid,
+      );
+
+      final user = UserModel.fromJson(data!, uid);
+
+      return user;
+
+    } catch (e) {
+      throw ApiException('حدث خطأ غير متوقع');
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await fireBaseService.signOut();
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthErrorMapper.map(e);
+    } on ApiException {
+      rethrow;
+    } catch (_) {
+      throw ApiException('حدث خطأ غير متوقع');
+    }
+  }
+
 
 
 

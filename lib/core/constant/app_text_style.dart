@@ -43,7 +43,7 @@ abstract class AppTextStyle {
   static const TextStyle regular16 = TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w300,
   );
 
   static const TextStyle regular12 = TextStyle(

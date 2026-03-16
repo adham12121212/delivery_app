@@ -37,7 +37,8 @@ class _CartViewState extends State<CartView> {
           children: [
             Expanded(
               child: BlocBuilder<CartCubit, CartState>(
-                builder: (context, state) {
+                builder: (context, state)
+                {
                   if (state is CartInitial) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is CartLoaded) {
@@ -83,8 +84,14 @@ class _CartViewState extends State<CartView> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(item.name,
-                                              style: AppTextStyle.bold16.copyWith(color: AppColor.blackColor)),
+                                          SizedBox(
+                                            width: 120.w,
+                                            child: Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                item.name,
+                                                style: AppTextStyle.bold16.copyWith(color: AppColor.blackColor)),
+                                          ),
                                           IconButton(
                                             icon: const Icon(Icons.close_rounded, color: Colors.grey),
                                             onPressed: () => context.read<CartCubit>().removeItem(item.id),
