@@ -120,7 +120,15 @@ class _SelectLocationBodyState extends State<_SelectLocationBody> {
                   onPressed: canConfirm
                       ? () async {
                     final finalLatLng = _centerLatLng!;
-                    await cubit.saveLocation(finalLatLng);
+                    final uid = await AuthLocalData.getUid();
+                    if (uid == null) {
+                      // يمكن عرض خطأ إذا لم يكن uid موجود
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('المستخدم غير مسجل الدخول'))
+                      );
+                      return;
+                    }
+                    await cubit.saveLocation(uid: uid, latLng: finalLatLng);
                     await AuthLocalData.saveLocation(finalLatLng.latitude, finalLatLng.longitude);
                   }
                       : null,

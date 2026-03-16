@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/get_it.dart';
 import '../../data/auth_repo_impl/login_repo.dart';
+import '../../data/model/user_model.dart';
 import '../../domain/auth_repo/auth_repo.dart';
 import '../cubit/auth_cubit.dart';
 import '../rest_api_cubit/restapi_cubit.dart';
@@ -19,7 +20,7 @@ class LoginView extends StatelessWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: BlocProvider(
         create: (context) => AuthCubit(
-          getIt.get<AuthRepo>(),
+          getIt.get<AuthRepo>()
         ),
         child: Scaffold(
           backgroundColor: AppColor.accent,
