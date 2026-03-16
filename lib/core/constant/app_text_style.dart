@@ -12,6 +12,11 @@ abstract class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle medium16 = TextStyle(
+    fontFamily: 'IBM Plex Sans Arabic',
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
 
   static const TextStyle bold24 = TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
@@ -23,6 +28,11 @@ abstract class AppTextStyle {
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
+  static const TextStyle bold19 = TextStyle(
+    fontFamily: 'IBM Plex Sans Arabic',
+    fontSize: 19,
+    fontWeight: FontWeight.bold,
+  );
 
   static const TextStyle regular14 = TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
@@ -33,12 +43,17 @@ abstract class AppTextStyle {
   static const TextStyle regular16 = TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w300,
   );
 
   static const TextStyle regular12 = TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
     fontSize: 12,
     fontWeight: FontWeight.w300,
+  );
+  static const TextStyle simeBold17 = TextStyle(
+    fontFamily: 'IBM Plex Sans Arabic',
+    fontSize: 17,
+    fontWeight: FontWeight.w600,
   );
 }

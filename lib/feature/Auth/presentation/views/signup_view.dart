@@ -4,6 +4,7 @@ import 'package:delivery_app/feature/Auth/presentation/widgets/signup_view_body_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/model/user_model.dart';
 import '../../domain/auth_repo/auth_repo.dart';
 import '../widgets/signup_view_body.dart';
 
