@@ -5,6 +5,7 @@ import 'package:delivery_app/feature/cart/data/model/cart_item_model.dart';
 import 'package:delivery_app/feature/restaurant/data/model/resturant_model.dart';
 import '../../feature/home/data/model/offer_model.dart';
 import '../../feature/menu/data/model/menu_model.dart';
+import '../../feature/order/data/model/order_model.dart';
 
 class FireStoreData{
 
@@ -43,8 +44,25 @@ class FireStoreData{
         .map((doc) => MenuModel.fromJson(doc.data(), doc.id))
         .toList();
   }
+  Future<List<OrderModel>> getOrder(String userId) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(userId)
+        .collection('order')
+        .get();
 
+    return snapshot.docs
+        .map((doc) => OrderModel.fromJson(doc.data(), doc.id))
+        .toList();
+  }
 
+  Future<void> addOrder(String userId, OrderModel order) async {
+    await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(userId)
+        .collection('order')
+        .add(order.toJson());
+  }
 
 
   Future<void> addData({
@@ -125,7 +143,45 @@ class FireStoreData{
     return doc.exists ? doc.data() as Map<String, dynamic> : null;
   }
 
+  Future<void> deleteDocument({
+    required String collection,
+    required String docId,
+    String? subCollection,
+    String? subDocId,
+  }) async {
+    if (subCollection != null && subDocId != null) {
+      await _firestore
+          .collection(collection)
+          .doc(docId)
+          .collection(subCollection)
+          .doc(subDocId)
+          .delete();
+    } else {
+      await _firestore
+          .collection(collection)
+          .doc(docId)
+          .delete();
+    }
+  }
 
+  Future<List<Map<String, dynamic>>> getCollection({
+    required String collection,
+    required String docId,
+    required String subCollection,
+  }) async {
+    final snapshot = await _firestore
+        .collection(collection)
+        .doc(docId)
+        .collection(subCollection)
+        .get();
+
+    return snapshot.docs.map((doc) {
+      return {
+        'id': doc.id, // مهم جدًا
+        ...doc.data(),
+      };
+    }).toList();
+  }
 
 
 }

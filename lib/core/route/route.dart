@@ -6,6 +6,7 @@ import 'package:delivery_app/feature/location/presentation/cubit/location_cubit.
 import 'package:delivery_app/feature/menu/presentation/view/menu_view.dart';
 import 'package:delivery_app/feature/restaurant/data/restaurant_repo_impl/restaurant_repo_impl.dart';
 import 'package:delivery_app/feature/restaurant/presentation/view/restaurant_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,12 +18,16 @@ import '../../feature/Auth/presentation/views/rest_email_view.dart';
 import '../../feature/Auth/presentation/views/success_view.dart';
 import '../../feature/cart/presentation/cubit/cart_cubit.dart';
 import '../../feature/cart/presentation/view/cart_view.dart';
+import '../../feature/favorite/presentation/view/favorite_view.dart';
 import '../../feature/home/domain/home_repo/home_repo.dart';
 import '../../feature/home/presentation/cubit/home_cubit.dart';
 import '../../feature/home/presentation/view/home_view.dart';
 import '../../feature/location/domain/location_repo/location_repo.dart';
 import '../../feature/location/presentation/view/location_view.dart';
 import '../../feature/menu/data/model/menu_model.dart';
+import '../../feature/order/domain/repo_order/repo_order.dart';
+import '../../feature/order/presentation/cubit/order_cubit.dart';
+import '../../feature/order/presentation/view/order_view.dart';
 import '../di/get_it.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings setting) {
@@ -35,11 +40,25 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
             ),
             BlocProvider(
               create: (context) => CartCubit()..listenCart(),),
+            BlocProvider(
+              create: (context) => OrderCubit(getIt.get<RepoOrder>())..getOrder(
+                FirebaseAuth.instance.currentUser!.uid,
+              ),),
             BlocProvider(create:(context)=> LocationCubit(getIt.get<LocationRepo>())..getLocation()),
           ],
 
               child: MainNavView())
           );
+    case OrderView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => OrderCubit(
+              getIt.get<RepoOrder>()
+          )
+            ..getOrder(FirebaseAuth.instance.currentUser!.uid),
+          child: const OrderView(),
+        ),
+      );
     case LoginView.routeName:
       return MaterialPageRoute(builder: (context) => const LoginView());
     case SignupView.routeName:
@@ -48,6 +67,8 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
       return MaterialPageRoute(builder: (context) => CartView());
     case SelectLocationView.routeName:
       return MaterialPageRoute(builder: (context) => const SelectLocationView());
+      case FavoriteView.routeName:
+      return MaterialPageRoute(builder: (context) => const FavoriteView());
     case RestEmailView.routeName:
       return MaterialPageRoute(builder: (context) => const RestEmailView());
     case OTPView.routeName:

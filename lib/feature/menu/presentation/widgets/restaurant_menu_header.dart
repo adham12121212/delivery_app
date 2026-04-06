@@ -31,15 +31,9 @@ class RestaurantMenuHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(
-                    widget.restaurantTitle,
-                    style: AppTextStyle.bold19,
-                  ),
-                  const Spacer(),
-                  const Icon(Icons.favorite_border),
-                ],
+              Text(
+                widget.restaurantTitle,
+                style: AppTextStyle.bold19,
               ),
                SizedBox(height: 20.w),
               Row(

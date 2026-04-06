@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/app_text_style.dart';
+import '../../../order/data/model/order_model.dart';
+import '../../../order/presentation/cubit/order_cubit.dart';
+import '../../../order/presentation/view/order_view.dart';
 import '../../data/model/cart_item_model.dart';
 import '../cubit/cart_cubit.dart';
 
@@ -200,7 +204,27 @@ class _CartViewState extends State<CartView> {
                           width: double.infinity,
                           height: 54.h,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              final cartState = context.read<CartCubit>().state;
+
+                              if (cartState is CartLoaded) {
+                                final userId = FirebaseAuth.instance.currentUser!.uid;
+                                for (var item in cartState.items) {
+                                  final order = OrderModel(
+                                    id: '', // مش مهم هنا
+                                    name: item.name,
+                                    status: 'جاري التحضير',
+                                    price: item.totalPrice,
+                                    image: item.image,
+                                  );
+
+                                  await context.read<OrderCubit>().addOrder(userId, order);
+                                  await context.read<CartCubit>().clearCart();
+                                  Navigator.pushNamed(context, OrderView.routeName);
+                                }
+
+                                // ممكن تفضي السلة هنا
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColor.accent,

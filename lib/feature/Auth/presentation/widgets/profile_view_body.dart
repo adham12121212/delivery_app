@@ -1,7 +1,9 @@
 import 'package:delivery_app/feature/Auth/data/model/user_model.dart';
 import 'package:delivery_app/feature/Auth/domain/entity/user_entity.dart';
 import 'package:delivery_app/feature/Auth/presentation/cubit/auth_cubit.dart';
+import 'package:delivery_app/feature/favorite/presentation/view/favorite_view.dart';
 import 'package:delivery_app/feature/location/presentation/cubit/location_cubit.dart';
+import 'package:delivery_app/feature/order/presentation/view/order_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,19 +82,32 @@ class ProfileViewBody extends StatelessWidget {
               _menuItem(
                 icon: Icons.receipt_long_outlined,
                 title: "طلباتي",
+                onTap: (){
+                  Navigator.pushNamed(context, OrderView.routeName);
+                }
               ),
 
               _menuItem(
+                icon: Icons.favorite_border,
+                title: "المفضل",
+                onTap: (){
+                  Navigator.pushNamed(context, FavoriteView.routeName);
+
+                }
+              ),
+              _menuItem(
                 icon: Icons.payment_outlined,
                 title: "طرق الدفع",
+                onTap: (){}
               ),
 
               _menuItem(
                 icon: Icons.settings_outlined,
                 title: "الإعدادات",
+                onTap: (){}
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
 
               /// Logout Button
               SizedBox(
@@ -162,14 +177,13 @@ class ProfileViewBody extends StatelessWidget {
   Widget _menuItem({
     required IconData icon,
     required String title,
+    required Function() onTap
   }) {
     return ListTile(
       leading: Icon(icon),
       title: Text(title),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {
-
-      },
+      onTap: onTap,
     );
   }
 }

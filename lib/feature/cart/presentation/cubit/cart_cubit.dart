@@ -57,4 +57,22 @@ class CartCubit extends Cubit<CartState> {
 
     await _firestore.collection('user').doc(uid).collection('cart').doc(itemId).delete();
   }
+
+  Future<void> clearCart() async {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    final cartCollection = await _firestore
+        .collection('user')
+        .doc(uid)
+        .collection('cart')
+        .get();
+
+    final batch = _firestore.batch();
+
+    for (var doc in cartCollection.docs) {
+      batch.delete(doc.reference);
+    }
+
+    await batch.commit();
+  }
 }

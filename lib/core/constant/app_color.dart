@@ -30,7 +30,7 @@ class AppColor {
 
 
   static const primary = Color(0xFFFF4B3A);
-  static const accent = Color(0xFFFFB800);
+  static const accent = Color(0xFF79AE6F);
 
   static const background = Color(0xFFFFFFFF);
   static const surface = Color(0xFFF7F7F7);

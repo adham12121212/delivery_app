@@ -1,3 +1,4 @@
+import 'package:delivery_app/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,8 @@ import '../../../../core/di/get_it.dart';
 import '../../../../core/widgets/awesome_snack_bar_content.dart';
 import '../../../cart/data/model/cart_item_model.dart';
 import '../../../cart/presentation/cubit/cart_cubit.dart';
+import '../../../favorite/domain/repo_favorite/repo_favorite.dart';
+import '../../../favorite/presentation/widgets/favorite_button.dart';
 import '../../../menu/data/model/menu_model.dart';
 import '../../domain/details_repo/details_repo.dart';
 import '../cubit/details_cubit.dart';
@@ -20,11 +23,18 @@ class DetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => DetailsCubit(
-        menu.price,
-      ),
-      child: Scaffold(
+
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => DetailsCubit(menu.price),
+          ),
+          BlocProvider(
+            create: (_) => FavoriteCubit(getIt.get<RepoFavorite>())
+              ..getFavorite(FirebaseAuth.instance.currentUser!.uid),
+          ),
+        ],
+  child: Scaffold(
         backgroundColor: AppColor.whiteColor,
         body: CustomScrollView(
           slivers: [
@@ -32,23 +42,30 @@ class DetailsView extends StatelessWidget {
               expandedHeight: 260.h,
               pinned: true,
               backgroundColor: AppColor.whiteColor,
-              leadingWidth: 70.w,
+              leadingWidth: 470.w,
               scrolledUnderElevation: 0,
-              leading: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
-                  height: 45.h,
-                  width: 45.h,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: AppColor.accent,
+              leading: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
+                      height: 45.h,
+                      width: 30.h,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        color: AppColor.accent,
+                      ),
+                      child: Icon(Icons.arrow_back, size: 25, color: AppColor.whiteColor),
+                    ),
                   ),
-                  child: Icon(Icons.arrow_back, size: 25, color: AppColor.whiteColor),
-                ),
+                  FavoriteButton(menu: menu),
+                ],
               ),
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(menu.image, fit: BoxFit.cover),
+                background: Image.network(
+                    menu.image, fit: BoxFit.cover),
               ),
             ),
             SliverPadding(
@@ -155,6 +172,7 @@ class DetailsView extends StatelessWidget {
                         );
                       },
                     style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 20,horizontal: 8),
                        backgroundColor: AppColor.accent,
                         foregroundColor: AppColor.whiteColor,
                         elevation: 0,
@@ -169,6 +187,6 @@ class DetailsView extends StatelessWidget {
           },
         ),
       ),
-    );
+);
   }
 }

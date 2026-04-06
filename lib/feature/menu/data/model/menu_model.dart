@@ -24,7 +24,7 @@ class MenuModel {
       image: json['image'] ?? '',
       name: json['name'] ?? '',
       price: (json['price'] ?? 0).toDouble() ,
-      menuCategory: json['menuCategory'] ?? '',
+      menuCategory: json['menuCategory'] ?? 'ss',
       isAvailable: json['isAvailable'] ?? true,
     );
   }
