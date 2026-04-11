@@ -16,7 +16,8 @@ class RestEmailViewBody extends StatefulWidget {
    RestEmailViewBody({super.key,required this.emailController});
   TextEditingController emailController =TextEditingController();
 
-  @override
+
+   @override
   State<RestEmailViewBody> createState() => _RestEmailViewBodyState();
 }
 
@@ -26,15 +27,7 @@ class _RestEmailViewBodyState extends State<RestEmailViewBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors:AppColor.primaryColors,
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            stops: [0,100]
-
-        ),
-      ),
+      color: AppColor.accent,
       child: Column(
         children: [
           Padding(
@@ -70,8 +63,8 @@ class _RestEmailViewBodyState extends State<RestEmailViewBody> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(height: 24.h,),
-                          SvgPicture.asset('assets/logo/restemaillogo.svg'),
+                          SizedBox(height: 35.h,),
+                          SvgPicture.asset('assets/logo/restemaillogo.svg',color: AppColor.accent,),
                           SizedBox(height: 8.h,),
                           Text('استعادة كلمة المرور!',style: AppTextStyle.bold24,),
                           SizedBox(height: 8.h,),
@@ -100,15 +93,12 @@ class _RestEmailViewBodyState extends State<RestEmailViewBody> {
                           ),
 
                           SizedBox(height: 24.h,),
-                          // CustomButton(title: 'ارسال رمز التحقق',
-                          //   onTap: (){
-                          //
-                          //   },),
+
                           GradientButton(
-                            text: "ارسال رمز التحقق",
+                            text: "ارسال",
                             onTap: () {
-                              context.read<ResetCubit>().sendOTP(
-                                  widget.emailController.text);
+                              final email = widget.emailController.text.trim();
+                              context.read<ResetCubit>().sendResetLink(email);
                               print(widget.emailController.text);
                             }),
                           SizedBox(height: 230.h,),

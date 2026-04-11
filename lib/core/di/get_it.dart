@@ -1,5 +1,7 @@
 
 
+import 'package:delivery_app/feature/favorite/data/repo_favorite_impl/repo_favorite_impl.dart';
+import 'package:delivery_app/feature/favorite/domain/repo_favorite/repo_favorite.dart';
 import 'package:delivery_app/feature/home/data/home_repo_impl/home_repo_impl.dart';
 import 'package:delivery_app/feature/home/domain/home_repo/home_repo.dart';
 import 'package:delivery_app/feature/menu/data/menu_repo_iml/menu_repo_impl.dart';
@@ -22,6 +24,9 @@ import '../../feature/details/domain/details_repo/details_repo.dart';
 import '../../feature/location/data/location_repo_impl/location_repo_impl.dart';
 import '../../feature/location/domain/location_repo/location_repo.dart';
 import '../../feature/location/presentation/cubit/location_cubit.dart';
+import '../../feature/order/data/repo_repo_impl/repo_order_impl.dart';
+import '../../feature/order/domain/repo_order/repo_order.dart';
+import '../../feature/order/presentation/cubit/order_cubit.dart';
 import '../networking/api_service.dart';
 import '../networking/dio_factory.dart';
 import '../service/firebase_service.dart';
@@ -66,8 +71,13 @@ void setupLocator() {
   getIt.registerFactory<MenuCubit>(() => MenuCubit(getIt.get<MenuRepo>(),));
 
   getIt.registerFactory<LocationCubit>(() => LocationCubit(getIt.get<LocationRepo>(),));
-
-
+  getIt.registerLazySingleton<RepoOrder>(() => RepoOrderImpl(
+    getIt.get<FireStoreData>(),
+  ));
+ getIt.registerFactory<OrderCubit>(() => OrderCubit(getIt.get<RepoOrder>(),));
+  getIt.registerLazySingleton<RepoFavorite>(() => RepoFavoriteImpl(
+    getIt.get<FireStoreData>(),
+  ));
 }
 
 

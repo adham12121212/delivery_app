@@ -2,9 +2,7 @@ abstract class ResetState {}
 
 class ResetInitial extends ResetState {}
 class ResetLoading extends ResetState {}
-
-class OtpSent extends ResetState {}
-class OtpVerified extends ResetState {}
+class ResetSuccess extends ResetState {}
 class ResetLinkSent extends ResetState {}
 class PasswordChanged extends ResetState {}
 
