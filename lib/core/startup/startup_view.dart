@@ -1,8 +1,10 @@
 import 'package:delivery_app/feature/Auth/presentation/views/signup_view.dart';
 import 'package:delivery_app/feature/home/presentation/widgets/nav_botton_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../feature/Auth/presentation/views/login_view.dart';
+import '../constant/app_color.dart';
 import '../storage/auth_local_data.dart';
 
 class StartupView extends StatefulWidget {
@@ -68,9 +70,10 @@ class _StartupViewState extends State<StartupView>
           opacity: _fadeAnimation,
           child: ScaleTransition(
             scale: _scaleAnimation,
-            child: SvgPicture.asset(
-              'assets/image/logo_app.svg',
-              width: 180,
+            child: Image.asset(
+              'assets/image/logo.png',
+              width: 180.w,
+              color: AppColor.accent,
             ),
           ),
         ),

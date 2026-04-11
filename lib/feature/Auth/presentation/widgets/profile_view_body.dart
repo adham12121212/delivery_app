@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/app_text_style.dart';
 import '../../../location/presentation/cubit/location_state.dart';
+import '../../../payment/view/presentation/payment_view.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({
@@ -98,7 +99,9 @@ class ProfileViewBody extends StatelessWidget {
               _menuItem(
                 icon: Icons.payment_outlined,
                 title: "طرق الدفع",
-                onTap: (){}
+                onTap: (){
+                  Navigator.pushNamed(context, PaymentView.routeName);
+                }
               ),
 
               _menuItem(
@@ -158,14 +161,18 @@ class ProfileViewBody extends StatelessWidget {
 
           Icon(icon),
 
-          SizedBox(width: 12.w),
+          SizedBox(width: 10.w),
 
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title, style: AppTextStyle.regular14),
               SizedBox(height: 4.h),
-              Text(value, style: AppTextStyle.medium16),
+              Text(
+                value, style: AppTextStyle.medium16,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              ),
             ],
           ),
         ],
@@ -181,7 +188,7 @@ class ProfileViewBody extends StatelessWidget {
   }) {
     return ListTile(
       leading: Icon(icon),
-      title: Text(title),
+      title: Text(title,),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,
     );

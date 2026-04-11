@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../feature/Auth/data/model/user_model.dart';
 import '../../feature/Auth/domain/auth_repo/auth_repo.dart';
 import '../../feature/Auth/presentation/cubit/auth_cubit.dart';
-import '../../feature/Auth/presentation/views/otp_view.dart';
 import '../../feature/Auth/presentation/views/rest_email_view.dart';
 import '../../feature/Auth/presentation/views/success_view.dart';
 import '../../feature/cart/presentation/cubit/cart_cubit.dart';
@@ -28,6 +27,7 @@ import '../../feature/menu/data/model/menu_model.dart';
 import '../../feature/order/domain/repo_order/repo_order.dart';
 import '../../feature/order/presentation/cubit/order_cubit.dart';
 import '../../feature/order/presentation/view/order_view.dart';
+import '../../feature/payment/view/presentation/payment_view.dart';
 import '../di/get_it.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings setting) {
@@ -71,12 +71,15 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
       return MaterialPageRoute(builder: (context) => const FavoriteView());
     case RestEmailView.routeName:
       return MaterialPageRoute(builder: (context) => const RestEmailView());
-    case OTPView.routeName:
-      return MaterialPageRoute(builder: (context) => OTPView(''));
     case SuccessView.routeName:
       return MaterialPageRoute(builder: (context) => const SuccessView());
     case HomeView.routeName:
-      return MaterialPageRoute(builder: (context) => const HomeView());
+      return MaterialPageRoute(builder: (context) =>  BlocProvider(
+  create: (context) => LocationCubit(getIt.get<LocationRepo>())..getLocation(),
+  child: HomeView(),
+));
+      case PaymentView.routeName:
+      return MaterialPageRoute(builder: (context) => const PaymentView());
     case RestaurantView.routeName:
       final category = setting.arguments as String?;
       return MaterialPageRoute(

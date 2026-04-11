@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:delivery_app/feature/home/presentation/cubit/home_cubit.dart';
+import 'package:delivery_app/feature/restaurant/presentation/widgets/restaurant_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,13 +105,20 @@ class HomeView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20.h),
+                      SizedBox(height: 10.h),
                       OffersCarousel(),
-                      SizedBox(height: 16.h),
                       Text('أفضل المطاعم',style: AppTextStyle.simeBold17.copyWith(
                         color: AppColor.accent
                       ),),
-                      SizedBox(height:120,),
+                      SizedBox(height:4),
+                      RestaurantCard(
+                          image: 'https://play-lh.googleusercontent.com/0tlx54ouzj_BFMCuV6vaSaJbVhCLHHP6FiZuY_S3SBv8dJ2sZd7KcB9E8Wbi5UE81co4',
+                          title: 'كرم الشام',
+                          deliveryTime: '٢٠ - ٢٥ دقيقة',
+                          deliveryPrice: '٣٠ جنيه',
+                          onTap: (){},
+                          rating:'٣.٤'),
+                      SizedBox(height: 110.h),
                     ],
                   ),
                 ),

@@ -18,6 +18,12 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
   );
 
+  static const TextStyle medium18 = TextStyle(
+    fontFamily: 'IBM Plex Sans Arabic',
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle bold24 = TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
     fontSize: 24,

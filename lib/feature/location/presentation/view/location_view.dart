@@ -5,6 +5,7 @@ import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/app_text_style.dart';
 import '../../../../core/storage/auth_local_data.dart';
 import '../../../home/presentation/view/home_view.dart';
+import '../../../home/presentation/widgets/nav_botton_bar.dart';
 import '../../data/location_repo_impl/location_repo_impl.dart';
 import '../cubit/location_cubit.dart';
 import '../cubit/location_state.dart';
@@ -68,7 +69,7 @@ class _SelectLocationBodyState extends State<_SelectLocationBody> {
             _centerLatLng = _clampToCairo(state.latLng!);
             _animateTo(_centerLatLng!);
           }
-          if (state is LocationSaveSuccess) Navigator.pushReplacementNamed(context, HomeView.routeName);
+          if (state is LocationSaveSuccess) Navigator.pushReplacementNamed(context, MainNavView.routeName);
         },
         builder: (context, state) {
           final cubit = context.read<LocationCubit>();

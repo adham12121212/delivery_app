@@ -70,23 +70,20 @@ class SuccessView extends StatelessWidget {
                               Text('تهانينا!', style: AppTextStyle.bold24,),
                               SizedBox(height: 8.h,),
                               Text(
-                                'لقد تم تغيير كلمة مرور حسابك بنجاح، يمكنك الان العودة وتسجيل الدخول من جديد!',
+                                'لقد تم ارسال رسالة تغير كلمة المرور حسابك بنجاح، يمكنك الان تغيرهاوالعودة وتسجيل الدخول من جديد!',
                                 textAlign: TextAlign.center,
                                 style: AppTextStyle.regular14.copyWith(
                                     color: AppColor.greyColor
                                 ),),
 
                               SizedBox(height: 24.h,),
-                              CustomButton(title: 'تسجيل الدخول',
+                              CustomButton(title: 'العودة  لتسجيل الدخول ',
                                 onTap: () {
                                   Navigator.of(context).pushReplacementNamed(
                                       LoginView.routeName);
                                 },),
                               SizedBox(height: 16.h),
-                              Text('تصفح سياسات الاستخدام والخصوصية',
-                                style: AppTextStyle.regular14.copyWith(
-                                    color: AppColor.blackColor
-                                ),)
+
                             ],
                           ),
                         ),

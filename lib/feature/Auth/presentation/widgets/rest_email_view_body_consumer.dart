@@ -1,10 +1,9 @@
 import 'package:delivery_app/feature/Auth/presentation/widgets/rest_email_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../reset_cubit/reset_cubit.dart';
 import '../reset_cubit/reset_state.dart';
-import '../views/otp_view.dart';
+import '../views/success_view.dart';
 
 class RestEmailViewBodyConsumer extends StatelessWidget {
   RestEmailViewBodyConsumer({super.key});
@@ -14,15 +13,10 @@ class RestEmailViewBodyConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ResetCubit, ResetState>(
       listener: (context, state) {
-        if (state is OtpSent) {
-          Navigator.push(
+        if (state is ResetLinkSent) {
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-              builder: (_) => BlocProvider.value(
-                value: context.read<ResetCubit>(),
-                child: OTPView(email.text),
-              ),
-            ),
+            MaterialPageRoute(builder: (_) => const SuccessView()),
           );
         }
 
@@ -33,7 +27,7 @@ class RestEmailViewBodyConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return RestEmailViewBody(emailController: email);
+        return RestEmailViewBody(emailController: email,);
       },
     );
   }
